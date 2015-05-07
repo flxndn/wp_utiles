@@ -1,6 +1,44 @@
 # wp_utiles
 Herramientas para manejo de la Wikipedia
 
+## wp_enlace2citaweb.pl
+Convierte 
+
+[<url>] en \{\{cita web | url=<url> | facha_acceso=<fecha actual> | campos adicionales vacíos\}\}
+
+[<url> <título>] en \{\{cita web | url=<url> | título=<título> | facha_acceso=<fecha actual> | campos adicionales vacíos\}\}
+
+### Uso 
+```
+ wp_enlace2citaweb.pl -h 
+```
+
+```
+ wp_enlace2citaweb.pl [opciones]
+```
+
+
+### Opciones
+#### -h
+Muestra esta ayuda.
+
+
+#### -n
+La plantilla generada es Cita noticia
+
+
+#### -w
+La plantilla generada es Cita web
+
+Es la opción por defecto
+
+
+#### -e 
+Salida expandida: los campos están en diferentes líneas.
+
+
+
+
 ## wp_libro2harvard.txt
 Si en la entrada estándar hay un elemento de la wikipedia como cita libro, cita web y otros, como
 

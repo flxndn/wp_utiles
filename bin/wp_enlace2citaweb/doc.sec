@@ -1,6 +1,0 @@
-* Especificaciones
-	Convierte 
-
-	[<url>] en {{cita web | url=<url> | facha_acceso=<fecha actual> | campos adicionales vacíos}}
-
-	[<url> <título>] en {{cita web | url=<url> | título=<título> | facha_acceso=<fecha actual> | campos adicionales vacíos}}
