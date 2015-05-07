@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use POSIX qw(strftime);
 
 
 #-------------------------------------------------------------------------------
@@ -47,7 +48,9 @@ while ($#ARGV > -1) {
 	shift;
 }
 
-my $extras_comun = "fecha =$sep| fecha_acceso =$sep| nombre =$sep| apellidos =";
+my $date = strftime "%e de %B de %Y", localtime;
+$date=~s/^ //;
+my $extras_comun = "fecha =$sep| fecha_acceso = $date$sep| nombre =$sep| apellidos =";
 my $extras;
 
 if($tipo eq "web") {
@@ -58,8 +61,8 @@ if($tipo eq "noticia") {
 }
 
 while(<>) {
-	s/\[\[([^ \]]*) ([^]]*)\]\]/{{cita $tipo$sep| url = $1$sep| título = $2$sep| $extras }}/g;
-	s/\[\[([^ \]]*) ([^]]*)\]\]/{{cita $tipo$sep| url = $1$sep| título =$sep| $extras }}/g;
+	s/\[([^ \]]*) ([^]]*)\]/{{cita $tipo$sep| url = $1$sep| título = $2$sep| $extras }}/g;
+	s/\[([^ \]]*) ([^]]*)\]/{{cita $tipo$sep| url = $1$sep| título =$sep| $extras }}/g;
 	print;
 }
 #-------------------------------------------------------------------------------
