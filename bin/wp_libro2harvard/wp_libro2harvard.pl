@@ -1,19 +1,23 @@
 #!/usr/bin/perl -w
 
-my $entrada="{{cita libro|título=modorro|apellidos=Valle|nombre=Juan|año=1233|página=34|isbn=3q344}}";
-my $salida= "{{Harvnp|Valle|1233|p=34}}";
+my $entrada="{{cita libro|título=Caos|apellidos=Gleick|nombre=James|año=1990|página=34|isbn=3q344}}";
+my $salida= "{{Harvnp|Gleick|1990|p=34}}";
 
 #-------------------------------------------------------------------------------
 sub help{
+	my $in=$entrada;
+	my $out=$salida;
+	$in=~s/([{}])/\\$1/g;
+	$out=~s/([{}])/\\$1/g;
 #-------------------------------------------------------------------------------
-	print "* libro2harvard.txt
+	print "* wp_libro2harvard.txt
 	Si en la entrada estándar hay un elemento de la wikipedia como cita libro, cita web y otros, como
 
-	> $entrada
+	> $in
 
 	genera una Ficha:Harvnp como
 
-	> $salida
+	> $out
 
 	* Opciones
 		* -h
