@@ -8,9 +8,9 @@ sub help{
 	print "* wp_enlace2citaweb.pl
 	Convierte 
 
-	[<url>] en \\{\\{cita web | url=<url> | facha_acceso=<fecha actual> | campos adicionales vacíos\\}\\}
+	[<url>] en \\{\\{cita web | url=<url> | fachaacceso=<fecha actual> | campos adicionales vacíos\\}\\}
 
-	[<url> <título>] en \\{\\{cita web | url=<url> | título=<título> | facha_acceso=<fecha actual> | campos adicionales vacíos\\}\\}
+	[<url> <título>] en \\{\\{cita web | url=<url> | título=<título> | fachaacceso=<fecha actual> | campos adicionales vacíos\\}\\}
 
 	* Uso 
 		> wp_enlace2citaweb.pl -h 
@@ -50,7 +50,7 @@ while ($#ARGV > -1) {
 
 my $date = strftime "%e de %B de %Y", localtime;
 $date=~s/^ //;
-my $extras_comun = "fecha =$sep| fecha_acceso = $date$sep| nombre =$sep| apellidos =";
+my $extras_comun = "fecha =$sep| fechaacceso = $date$sep| nombre =$sep| apellidos =";
 my $extras;
 
 if($tipo eq "web") {
