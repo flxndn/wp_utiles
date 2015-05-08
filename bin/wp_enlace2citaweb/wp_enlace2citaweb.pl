@@ -62,7 +62,7 @@ if($tipo eq "noticia") {
 
 while(<>) {
 	s/\[([^ \]]*) ([^]]*)\]/{{cita $tipo$sep| url = $1$sep| título = $2$sep| $extras }}/g;
-	s/\[([^ \]]*) ([^]]*)\]/{{cita $tipo$sep| url = $1$sep| título =$sep| $extras }}/g;
+	s/\[([^ \]]*)\]/{{cita $tipo$sep| url = $1$sep| título =$sep| $extras }}/g;
 	print;
 }
 #-------------------------------------------------------------------------------
