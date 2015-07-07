@@ -40,6 +40,9 @@ sub help{
 			Expande con un campo en cada línea.
 		* -j 
 			Une los libros en una única línea.
+	* Errores
+		- Si no hay apellidos pero sí apellidoseditor debería utilizar éste, pero no lo hace.
+		- Si hay espacio tras el año lo mantiene.
 	\n";
 }
 #-------------------------------------------------------------------------------
@@ -107,22 +110,16 @@ my $posicion;
 my $ano;
 for(@campos) {
 	my ($key,$value)=split(/[ \t]*=[ \t]*/,$_);
-	if ($key=~/^apellidos?$/) 
-		{$autores[0]=$value;}
-	if ($key=~/^apellidos?2$/)
-		{$autores[1]=$value;}
-	if ($key=~/^apellidos?3$/)
-		{$autores[2]=$value;}
-	if ($key=~/^apellidos?4$/)
-		{$autores[3]=$value;}
-	if ($key=~/^capítulo$/)   
-		{$posicion="loc=«$value»";}
-	if ($key=~/^páginas$/)    
-		{$posicion="pp=$value";}
-	if ($key=~/^página$/)     
-		{$posicion="p=$value";}
-	if ($key=~/^año$/)        
-		{$ano="$value";}
+	$value=~s/^ *//;
+	$value=~s/ *$//;
+	if ($key=~/^apellidos?$/)	{$autores[0]=$value;}
+	if ($key=~/^apellidos?2$/)	{$autores[1]=$value;}
+	if ($key=~/^apellidos?3$/)	{$autores[2]=$value;}
+	if ($key=~/^apellidos?4$/)	{$autores[3]=$value;}
+	if ($key=~/^capítulo$/)		{$posicion="loc=«$value»";}
+	if ($key=~/^páginas$/)		{$posicion="pp=$value";}
+	if ($key=~/^página$/)		{$posicion="p=$value";}
+	if ($key=~/^año$/)			{$ano="$value";}
 }
 print "{{Harvnp|".join("|",@autores)."|$ano";
 if ($posicion){ print "|$posicion";}
