@@ -4,9 +4,9 @@ Herramientas para manejo de la Wikipedia
 ## wp_enlace2citaweb.pl
 Convierte 
 
-[<url>] en \{\{cita web | url=<url> | facha_acceso=<fecha actual> | campos adicionales vacíos\}\}
+[<url>] en \{\{cita web | url=<url> | fachaacceso=<fecha actual> | campos adicionales vacíos\}\}
 
-[<url> <título>] en \{\{cita web | url=<url> | título=<título> | facha_acceso=<fecha actual> | campos adicionales vacíos\}\}
+[<url> <título>] en \{\{cita web | url=<url> | título=<título> | fachaacceso=<fecha actual> | campos adicionales vacíos\}\}
 
 ### Uso 
 ```
@@ -135,6 +135,27 @@ Se puede comprobar su funcionamiento con el script bash
 ### Solucionado
 *  También cambia cuando las versalitas no son aplicables: títulos de secciones y categorías
 *  Cambia las plantillas versalita con siglo en minúsculas por el siglo en mayúsculas
+
+
+## wp_caracteres_especiales.sh
+### Uso
+*  wp_caracteres_especiales.sh [fichero]
+*  wp_caracteres_especiales.sh -h
+
+### Descripción 
+Convierte algunas abreviaturas de signos en los signos correspondientes
+
+
+### Símbolos convertidos
+*  Tres puntos en elipsis
+*  Dos guiones en guión largo
+*  ss. en el símbolo de sección
+
+### Opciones
+#### -h
+Muestra esta ayuda 
+
+
 
 
 ## wp_ls_plantilla_siglo.sh
