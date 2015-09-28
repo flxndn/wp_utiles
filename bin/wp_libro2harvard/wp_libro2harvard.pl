@@ -24,6 +24,8 @@ sub help{
 			Muestra esta ayuda.
 		* -t
 			Muestra ejemplos de cadena de entrada y salida.
+		* -T
+			Traduce nombres de campos del inglés al español.
 		* -p
 			Genera la plantilla Harvnp.
 
@@ -44,6 +46,46 @@ sub help{
 		- Si no hay apellidos pero sí apellidoseditor debería utilizar éste, pero no lo hace.
 		- Si hay espacio tras el año lo mantiene.
 	\n";
+}
+#-------------------------------------------------------------------------------
+sub traduce{
+#-------------------------------------------------------------------------------
+
+my %dic = (
+		'cite book' => 'cita libro',
+		'cite journal' => 'cita publicación',
+		'\| *authorlink *=' => '|enlaceautor=',
+		'\| *authorlink1 *=' => '|enlaceautor=',
+		'\| *date *=' => '|fecha=',
+		'\| *edition *=' => '|edición=',
+		'\| *editor-first *=' => '|nombre-editor=',
+		'\| *editor-last *=' => '|apellidos-editor=',
+		'\| *editor-link *=' => '|enlace-editor=',
+		'\| *first *=' => '|nombre=',
+		'\| *first1 *=' => '|nombre=',
+		'\| *first2 *=' => '|nombre2=',
+		'\| *first3 *=' => '|nombre3=',
+		'\| *issue *=' => '|número=',
+		'\| *journal *=' => '|publicación=',
+		'\| *last *=' => '|apellidos=',
+		'\| *last1 *=' => '|apellidos=',
+		'\| *last2 *=' => '|apellidos2=',
+		'\| *last3 *=' => '|apellidos3=',
+		'\| *location *=' => '|ubicación=',
+		'\| *page *=' => '|página=',
+		'\| *pages *=' => '|páginas=',
+		'\| *publisher *=' => '|editorial=',
+		'\| *series *=' => '|serie=',
+		'\| *title *=' => '|título=',
+		'\| *volume *=' => '|volumen=',
+		'\| *year *=' => '|año='
+		);
+	while(<>) {
+		foreach $key (keys %dic) {
+			s/$key/$dic{$key}/g;
+		}
+		print; 
+	}
 }
 #-------------------------------------------------------------------------------
 sub compacta{
@@ -91,6 +133,7 @@ sub junta_lineas{
 #-------------------------------------------------------------------------------
 if( @ARGV >0 && $ARGV[0] eq "-h"){ help; exit 0; }
 if( @ARGV >0 && $ARGV[0] eq "-t"){ print "$entrada\n"; print "$salida\n"; exit 0; }
+if( @ARGV >0 && $ARGV[0] eq "-T"){ shift;traduce; exit 0; }
 if( @ARGV >0 && $ARGV[0] eq "-c"){ shift;compacta; exit 0; }
 if( @ARGV >0 && $ARGV[0] eq "-e"){ shift;expande; exit 0; }
 if( @ARGV >0 && $ARGV[0] eq "-E"){ shift;expande_lineas; exit 0; }
