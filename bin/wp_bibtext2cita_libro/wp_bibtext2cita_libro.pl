@@ -53,6 +53,7 @@ my %tildes=('a' => 'á',
 my %dic= ( 'title' => 'título',
 			'series' => 'serie',
 			'year' => 'año',
+			'number' => 'número',
 			'author' => 'autor',
 			'publisher' => 'editorial');
 
@@ -67,6 +68,7 @@ while(<>) {
 		for my $letra (keys %tildes) {
 			$valor=~s/{\\'$letra}/$tildes{$letra}/g;
 		}
+		$valor=~s/{\\~n}/ñ/g;
 
 		$valor=~s/{//;
 		$valor=~s/},*//;

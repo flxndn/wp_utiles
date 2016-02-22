@@ -1,6 +1,82 @@
 # wp_utiles
 Herramientas para manejo de la Wikipedia
 
+## wp_autor2apellidos.pl
+### Uso
+```
+ wp_autor2apellidos.pl 
+```
+
+
+### DescripciÛn
+Convierte la entrada est·ndar
+
+```
+ | autor = APELLIDOS, NOMBRE
+```
+
+a
+
+```
+ | apellidos = APELLIDOS
+```
+
+```
+ | nombre = NOMBRE
+```
+
+o 
+
+```
+ | autor = [APELLIDOS, NOMBRE](ENLACE)
+```
+
+a
+
+```
+ | apellidos = APELLIDOS
+```
+
+```
+ | nombre = NOMBRE
+```
+
+```
+ | enlaceautor = ENLACE
+```
+
+
+### Opciones
+#### -h
+Muestra esta ayuda.
+
+
+
+
+## wp_bibtext2cita_libro.pl
+### Uso
+```
+ wp_bibtext2cita_libro.pl [fichero_bibtext]
+```
+
+
+### DescripciÛn
+Convierte el formato bibtext de la entrada est·ndar 
+[ o de fichero_bibtext ] y saca por salida est·ndar en formato 
+[Plantilla:Cita libro](https://es.wikipedia.org/wiki/Plantilla:Cita_libro).
+
+
+### Opciones
+#### -h
+Muestra esta ayuda.
+
+
+
+### Errores
+No funciona para eÒes o ues con diÈresis.
+
+
+
 ## wp_enlace2citaweb.pl
 Convierte 
 
@@ -61,6 +137,10 @@ Muestra esta ayuda.
 Muestra ejemplos de cadena de entrada y salida.
 
 
+#### -T
+Traduce nombres de campos del ingl√©s al espa√±ol.
+
+
 #### -p
 Genera la plantilla Harvnp.
 
@@ -87,6 +167,10 @@ Expande con un campo en cada l√≠nea.
 Une los libros en una √∫nica l√≠nea.
 
 
+
+### Errores
+*  Si no hay apellidos pero s√≠ apellidoseditor deber√≠a utilizar √©ste, pero no lo hace.
+*  Si hay espacio tras el a√±o lo mantiene.
 
 
 ## wp_plantilla_siglo.pl
