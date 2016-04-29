@@ -156,7 +156,7 @@ LINE: while(<>) {
 		($procesa_categorias || $_!~/^\[\[Categoría:/) )
 	{
 		foreach $siglo (@siglos) {
-			s/{{[vV]ersalita\|$siglo}}/$siglo/gi;
+			s/\{\{[vV]ersalita\|$siglo}}/$siglo/gi;
 		}
 		foreach $siglo (@siglos) {
 			foreach $cadena (@cadenas) {

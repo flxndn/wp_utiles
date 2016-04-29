@@ -42,6 +42,10 @@ sub help{
 			Expande con un campo en cada línea.
 		* -j 
 			Une los libros en una única línea.
+		* -v 
+			Pone los apellidos en versalita.
+		* -V
+			Quita las plantillas versalita de los apellidos.
 	* Errores
 		- Si no hay apellidos pero sí apellidoseditor debería utilizar éste, pero no lo hace.
 		- Si hay espacio tras el año lo mantiene.
@@ -78,6 +82,7 @@ my %dic = (
 		'\| *series *=' => '|serie=',
 		'\| *title *=' => '|título=',
 		'\| *volume *=' => '|volumen=',
+		'\| *accessdate *=' => '|fechaacceso=',
 		'\| *year *=' => '|año='
 		);
 	while(<>) {
@@ -91,7 +96,7 @@ my %dic = (
 sub compacta{
 #-------------------------------------------------------------------------------
 	while(<>){
-		s/{{ */{{/g;
+		s/\{\{ */{{/g;
 		s/ *}}/}}/g;
 		s/ *\|/|/g;
 		s/\| */|/g;
@@ -104,7 +109,7 @@ sub compacta{
 sub expande{
 #-------------------------------------------------------------------------------
 	while(<>){
-		s/{{/{{ /g;
+		s/\{\{/{{ /g;
 		s/}}/ }}/g;
 		s/\|/ | /g;
 		s/(\| [a-z\-]*)=/$1 = /g;
@@ -131,6 +136,22 @@ sub junta_lineas{
 	print "$l\n";;
 }
 #-------------------------------------------------------------------------------
+sub apellidos_en_versalitas{
+#-------------------------------------------------------------------------------
+	while(<>) {
+		s/apellidos([^=]*)=( *)([^|}]*)( *)/apellidos$1=$2\{\{versalita\|$3\}\}$4/g;
+		print;
+	}
+}
+#-------------------------------------------------------------------------------
+sub quita_versalitas{
+#-------------------------------------------------------------------------------
+	while(<>) {
+		s/\{\{versalita\|([^}]*)}}/$1/gi;
+		print;
+	}
+}
+#-------------------------------------------------------------------------------
 if( @ARGV >0 && $ARGV[0] eq "-h"){ help; exit 0; }
 if( @ARGV >0 && $ARGV[0] eq "-t"){ print "$entrada\n"; print "$salida\n"; exit 0; }
 if( @ARGV >0 && $ARGV[0] eq "-T"){ shift;traduce; exit 0; }
@@ -138,12 +159,14 @@ if( @ARGV >0 && $ARGV[0] eq "-c"){ shift;compacta; exit 0; }
 if( @ARGV >0 && $ARGV[0] eq "-e"){ shift;expande; exit 0; }
 if( @ARGV >0 && $ARGV[0] eq "-E"){ shift;expande_lineas; exit 0; }
 if( @ARGV >0 && $ARGV[0] eq "-j"){ shift;junta_lineas; exit 0; }
+if( @ARGV >0 && $ARGV[0] eq "-v"){ shift;apellidos_en_versalitas; exit 0; }
+if( @ARGV >0 && $ARGV[0] eq "-V"){ shift;quita_versalitas; exit 0; }
 
 my @lineas=<>; 
 chomp(@lineas);
 
 my $lineas=join("", @lineas);
-$lineas=~s/[^{]*{{//;
+$lineas=~s/[^{]*\{\{//;
 $lineas=~s/}}[^}]*//;
 my @campos=split(/[ \t]*\|[ \t]*/,$lineas);
 shift(@campos);
@@ -155,6 +178,7 @@ for(@campos) {
 	my ($key,$value)=split(/[ \t]*=[ \t]*/,$_);
 	$value=~s/^ *//;
 	$value=~s/ *$//;
+	if ($key=~/^autor$/)		{$autores[0]=$value;}
 	if ($key=~/^apellidos?$/)	{$autores[0]=$value;}
 	if ($key=~/^apellidos?2$/)	{$autores[1]=$value;}
 	if ($key=~/^apellidos?3$/)	{$autores[2]=$value;}
